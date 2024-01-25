@@ -1,6 +1,6 @@
 from string import punctuation
 
-from aiogram import F, types, Router
+from aiogram import types, Router
 
 from filters.chat_types import ChatTypeFilter
 
