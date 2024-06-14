@@ -1,6 +1,18 @@
+from re import I
 from aiogram import F, types, Router
 from aiogram.filters import CommandStart, Command, or_f
 from filters.chat_types import ChatTypeFilter
+from aiogram.types.web_app_info import WebAppInfo
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+def webapp_builder() -> InlineKeyboardBuilder:
+    builder = InlineKeyboardBuilder()
+    builder.button(
+        text='Open page', web_app=WebAppInfo(
+            url="https://alexandr31reg.github.io/"
+            )
+    )
+    return builder.as_markup()
 
 user_private_router = Router()
 user_private_router.message.filter(ChatTypeFilter(['private']))
@@ -8,7 +20,7 @@ user_private_router.message.filter(ChatTypeFilter(['private']))
 
 @user_private_router.message(CommandStart())
 async def start_cmd(message: types.Message):
-    await message.answer('Привет, я виртуальный помощник')
+    await message.answer('Привет, я виртуальный помощник', reply_markup=webapp_builder())
 
 
 # @user_private_router.message(F.text.lower() == "меню")
